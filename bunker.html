@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>THE ADMIN AREA - SECURITY OVERRIDE</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        #official-console {
+            display: none;
+            background: #000;
+            border: 1px solid #ff00ff;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .console-text {
+            color: #ff00ff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <span>SECURITY OVERRIDE TERMINAL</span>
+        <span id="game-score">RESEARCH PROGRESS: <span id="game-credits">0</span> PTS</span>
+        <span>NODE: ADMIN_STATION</span>
+    </div>
+
+    <nav class="nav-hub">
+        <a href="../index.html" class="nav-item">MAIN HUB</a>
+        <a href="reactor.html" class="nav-item">THE CORE</a>
+        <a href="research.html" class="nav-item">RESEARCH AREA</a>
+        <a href="bunker.html" class="nav-item active">ADMIN STUFF</a>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-title">PRIMARY SECURITY GATEWAY</div>
+            <div class="card-content">
+                <p style="font-size: 14px; color: var(--sub);">This is the administrative override terminal. Access is
+                    restricted via a security cipher. I programmed this section for facility maintenance and debugging,
+                    so unauthorized access is strictly prohibited. All activity is logged in the main hub.</p>
+                <div class="metric-card" style="margin-top:25px;">
+                    <span class="m-label">CIPHER INPUT</span>
+                    <input type="password" id="pass" placeholder="Enter Cipher"
+                        style="background:#000; color:#fff; border:1px solid var(--border); padding:15px; width:100%; box-sizing:border-box; margin-top:10px; border-radius:8px; font-family:monospace;">
+                    <button class="btn-action"
+                        style="width:100%; margin-top:20px; background:var(--text); color:var(--bg);"
+                        onclick="check()">EXECUTE CIPHER</button>
+                </div>
+
+                <div id="official-console">
+                    <h2 class="console-text" style="margin-top:0;">ADMIN SESSION: AUTHORIZED</h2>
+                    <div class="metrics-row">
+                        <div class="metric-card" style="border-color:#505;">
+                            <span class="m-label">KERNEL_KEY</span>
+                            <div class="m-value" style="font-size: 16px; color:#f0f;">SEC-RO-2026</div>
+                        </div>
+                        <div class="metric-card" style="border-color:#505;">
+                            <span class="m-label">ACCESS STATE</span>
+                            <div class="m-value" style="font-size: 16px; color:#f0f;">ROOT_BYPASS</div>
+                        </div>
+                    </div>
+                    <p class="console-text" style="margin-top:25px;">Administrative session established. The override
+                        protocols are now active. You can force the research credit buffer to max levels for system
+                        testing purposes. I spent a long time on this backend code, so please use it only for
+                        professional audits.</p>
+
+                    <button class="btn-action" style="width:100%; margin-top:20px; background:#ff00ff; color:#fff;"
+                        onclick="getInfinitePointsNow()">FORCE BUFFER OVERRIDE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../stuff.js"></script>
+    <script>
+        function check() {
+            let p = document.getElementById('pass').value;
+            if (p === 'uranium' || p === '1234') {
+                document.getElementById('official-console').style.display = 'block';
+                document.body.style.background = '#150615';
+            } else {
+                alert('ACCESS DENIED: INCORRECT SECURITY CIPHER.');
+            }
+        }
+    </script>
+</body>
+
+</html>

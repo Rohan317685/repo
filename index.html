@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NUCLEAR CONTROL HUB - PRODUCTION BUILD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <span>FACILITY MONITORING: ONLINE</span>
+        <span id="game-score">RESEARCH PROGRESS: <span id="game-credits">0</span> PTS</span>
+        <span>PC: MAIN_FRONTEND</span>
+    </div>
+
+    <nav class="nav-hub">
+        <a href="#main" class="nav-item">MAIN HUB</a>
+        <a href="#core" class="nav-item">THE CORE</a>
+        <a href="#research" class="nav-item">RESEARCH AREA</a>
+        <a href="#admin" class="nav-item">ADMIN STUFF</a>
+    </nav>
+
+    <div id="main" class="container">
+        <div class="card">
+            <div class="card-title">LIVE TELEMETRY FEED (REAL-TIME)</div>
+            <div class="card-content">
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <span class="m-label">CORE TEMP</span>
+                        <div class="m-value" id="stat-heat">350.0°C</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-label">POWER OUTPUT</span>
+                        <div class="m-value" id="stat-power">0.0 MW</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-label">SYSTEM STABILITY</span>
+                        <div class="m-value" id="stat-stability">100.0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="card">
+                <div class="card-title">PROJECT OVERVIEW & LOGS</div>
+                <div class="card-content">
+                    <p style="font-size: 14px; color: var(--sub); margin-top: 0;">Welcome to the official monitoring
+                        interface for the A1-Reactor. I worked really hard on this for the exhibition to make sure all
+                        the graphics and the physics engine were working perfectly. It's fully functional now, so you
+                        can earn research points by stabilizing the core in the control section. Hope it looks
+                        professional.</p>
+                    <div class="metric-card" style="background: rgba(255,255,255,0.02); border-color: var(--accent);">
+                        <span class="m-label">BUILD STATUS</span>
+                        <div class="m-value" style="font-size: 18px; color: var(--accent);">VERSION 1.0 </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">SYSTEM KERNEL LOGS</div>
+                <div class="card-content">
+                    <div class="log-stream">
+                        <div class="log-entry">Booting system kernel...</div>
+                        <div class="log-entry">Verifying local storage protocols.</div>
+                        <div class="log-entry">Establishing websocket connection to CORE.</div>
+                        <div class="log-entry">System is now live and stable.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <div id="core" class="container">
+        <div class="card">
+            <div class="card-title">REACTOR CORE VISUALIZATION (HD)</div>
+            <div class="card-content">
+                <div class="reactor-stage">
+                    <div class="vessel-3d">
+                        <div class="glow-effect" id="core-glow"></div>
+                        <div class="rod-array">
+                            <div class="control-rod" id="rod-v-0"></div>
+                            <div class="control-rod" id="rod-v-1"></div>
+                            <div class="control-rod" id="rod-v-2"></div>
+                            <div class="control-rod" id="rod-v-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">STABILIZATION PROTOCOL - EARN RESEARCH PTS</div>
+            <div class="card-content">
+                <div class="target-panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                        <p style="font-size:13px; color:var(--sub); margin:0;">Adjust the throttle levers to make the
+                            power marker align with the target zone. Holding the position generates research data.</p>
+                        <div id="match-light">OFFLINE</div>
+                    </div>
+                    <div class="target-bar">
+                        <div class="target-indicator" id="target-box"></div>
+                        <div class="current-indicator" id="current-power-marker"></div>
+                    </div>
+                 
+                    <div class="metrics-row" style="margin-top:25px;">
+                        <div class="metric-card">
+                            <span class="m-label">MW OUTPUT</span>
+                            <div class="m-value stat-power-display">0.0 MW</div>
+                        </div>
+                        <div class="metric-card">
+                            <span class="m-label">TEMP GAUGE</span>
+                            <div class="m-value stat-heat-display">350.0°C</div>
+                        </div>
+                        <div class="metric-card">
+                            <span class="m-label">STABILITY INDEX</span>
+                            <div class="m-value stat-stability-display">100.0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">MAIN STEERING & ROD CONTROL (V1.2)</div>
+            <div class="card-content">
+                <div class="control-levers">
+                    <div class="lever-group">
+                        <span class="m-label">ROD SET 01 (V)</span>
+                        <input type="range" class="throttle-v" min="0" max="100" value="20"
+                            oninput="updateRod(0, this.value)">
+                    </div>
+                    <div class="lever-group">
+                        <span class="m-label">ROD SET 02 (V)</span>
+                        <input type="range" class="throttle-v" min="0" max="100" value="20"
+                            oninput="updateRod(1, this.value)">
+                    </div>
+                    <div class="lever-group" style="grid-column: span 2;">
+                        <span class="m-label">HORIZONTAL TRIM STICK</span>
+                        <input type="range" class="throttle-h" min="0" max="100" value="20"
+                            oninput="updateRod(2, this.value)">
+                    </div>
+                    <div class="lever-group" style="grid-column: span 2;">
+                        <span class="m-label">AUX COOLING PUMP</span>
+                        <input type="range" class="throttle-h" min="0" max="100" value="50"
+                            oninput="updateCooling(this.value)">
+                    </div>
+                </div>
+                <p style="font-size:11px; color:#555; text-align:center; margin-top:20px;">I programmed these sliders to
+                    have a custom physics response to make them feel like a real industrial station. Please use them
+                    carefully.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <div id="research" class="container">
+        <div class="card">
+            <div class="card-title">CLASSIFIED ARCHIVE - DATA SETS (SHIPPED)</div>
+            <div class="card-content">
+                <p style="font-size: 14px; color: var(--sub);">Accessing these datasets requires research points. You
+                    can generate these by performing the stabilization protocols in the core control room. I made sure
+                    the progress saves locally to your browser profile so you don't lose anything.</p>
+
+                <div class="metrics-row" style="margin-top:25px;">
+                    <div class="metric-card" id="data-block-1" style="opacity: 0.4;">
+                        <span class="m-label">LOGSET-01 [A]</span>
+                        <div class="m-value" style="font-size: 18px;">50 PTS</div>
+                        <p style="font-size: 11px; color: var(--sub); margin:15px 0;">Historical stability telemetry
+                            from the prototype testing phase.</p>
+                        <button class="btn-action" id="unlock-btn-1" style="width:100%; font-size:11px;"
+                            onclick="unlock_sector(1, 50)">INITIATE DOWNLOAD</button>
+                        <div class="unlocked-data" id="data-content-1">
+                            <p style="color:var(--accent); font-weight:700;">[ STATUS: ACCESS GRANTED ]</p>
+                            <p style="font-size:12px;">Historical logs show that the core remained within 5% of the
+                                target threshold during 90% of operation. I spent a long time developing the unlock
+                                protocols for this interface.</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card" id="data-block-2" style="opacity: 0.4;">
+                        <span class="m-label">LOGSET-02 [B]</span>
+                        <div class="m-value" style="font-size: 18px;">150 PTS</div>
+                        <p style="font-size: 11px; color: var(--sub); margin:15px 0;">Thermal distribution data and
+                            cooling pump efficiency reports.</p>
+                        <button class="btn-action" id="unlock-btn-2" style="width:100%; font-size:11px;"
+                            onclick="unlock_sector(2, 150)">INITIATE DOWNLOAD</button>
+                        <div class="unlocked-data" id="data-content-2">
+                            <p style="color:var(--accent); font-weight:700;">[ STATUS: ACCESS GRANTED ]</p>
+                            <p style="font-size:12px;">Heat dissipation is critical. If the auxiliary pump isn't active,
+                                the core temperature reaches critical limits in seconds. I researched real cooling
+                                systems to make this logic accurate.</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card" id="data-block-3" style="opacity: 0.4;">
+                        <span class="m-label">LOGSET-03 [C]</span>
+                        <div class="m-value" style="font-size: 18px;">500 PTS</div>
+                        <p style="font-size: 11px; color: var(--sub); margin:15px 0;">Schematic visualizations of the
+                            reactor core geometry.</p>
+                        <button class="btn-action" id="unlock-btn-3" style="width:100%; font-size:11px;"
+                            onclick="unlock_sector(3, 500)">INITIATE DOWNLOAD</button>
+                        <div class="unlocked-data" id="data-content-3">
+                            <p style="color:var(--accent); font-weight:700;">[ STATUS: ACCESS GRANTED ]</p>
+                            <center>
+                                <div style="font-size:40px;">⚛️</div>
+                            </center>
+                            <p style="font-size:12px;">This is my custom drawing of the internal rod array. I hope this
+                                visualization helps people understand how the reactor is actually built. I'm really
+                                proud of this part of the project.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <div id="admin" class="container">
+        <div class="card">
+            <div class="card-title">PRIMARY SECURITY GATEWAY</div>
+            <div class="card-content">
+                <p style="font-size: 14px; color: var(--sub);">This is the administrative override terminal. Access is
+                    restricted via a security cipher. I programmed this section for facility maintenance and debugging,
+                    so unauthorized access is strictly prohibited. All activity is logged in the main hub.</p>
+                <div class="metric-card" style="margin-top:25px;">
+                    <span class="m-label">CIPHER INPUT</span>
+                    <input type="password" id="pass" placeholder="Enter Cipher"
+                        style="background:#000; color:#fff; border:1px solid var(--border); padding:15px; width:100%; box-sizing:border-box; margin-top:10px; border-radius:8px; font-family:monospace;">
+                    <button class="btn-action"
+                        style="width:100%; margin-top:20px; background:var(--text); color:var(--bg);"
+                        onclick="check()">EXECUTE CIPHER</button>
+                </div>
+
+                <div id="official-console">
+                    <h2 class="console-text" style="margin-top:0;">ADMIN SESSION: AUTHORIZED</h2>
+                    <div class="metrics-row">
+                        <div class="metric-card" style="border-color:#505;">
+                            <span class="m-label">KERNEL_KEY</span>
+                            <div class="m-value" style="font-size: 16px; color:#f0f;">SEC-RO-2026</div>
+                        </div>
+                        <div class="metric-card" style="border-color:#505;">
+                            <span class="m-label">ACCESS STATE</span>
+                            <div class="m-value" style="font-size: 16px; color:#f0f;">ROOT_BYPASS</div>
+                        </div>
+                    </div>
+                    <p class="console-text" style="margin-top:25px;">Administrative session established. The override
+                        protocols are now active. You can force the research credit buffer to max levels for system
+                        testing purposes. I spent a long time on this backend code, so please use it only for
+                        professional audits.</p>
+
+                    <button class="btn-action" style="width:100%; margin-top:20px; background:#ff00ff; color:#fff;"
+                        onclick="getInfinitePointsNow()">FORCE BUFFER OVERRIDE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Replace old individual IDs with classes in the MAIN block too for consistency -->
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var sets = [
+                { id: 'stat-heat', cls: 'stat-heat-display' },
+                { id: 'stat-power', cls: 'stat-power-display' },
+                { id: 'stat-stability', cls: 'stat-stability-display' }
+            ];
+            sets.forEach(function (s) {
+                var el = document.getElementById(s.id);
+                if (el) el.classList.add(s.cls);
+                // The ones in the reactor section already have the class and NO ID to avoid collision or just one ID.
+                // Actually I removed the IDs from the reactor section's stats in my draft above, using classes only.
+            });
+        });
+    </script>
+
+    <script src="stuff.js"></script>
+    <script>
+        function check() {
+            let p = document.getElementById('pass').value;
+            if (p === 'uranium' || p === '1234') {
+                document.getElementById('official-console').style.display = 'block';
+                document.body.style.background = '#150615';
+            } else {
+                alert('ACCESS DENIED: INCORRECT SECURITY CIPHER.');
+            }
+        }
+    </script>
+</body>
+
+
+</html>

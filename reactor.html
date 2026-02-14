@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>THE CORE - MISSION CONTROL STATION</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        #match-light {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #333;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 12px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <span>STATION STATUS: MONITORING LIVE</span>
+        <span id="game-score">RESEARCH PROGRESS: <span id="game-credits">0</span> PTS</span>
+        <span>NODE: REACTOR_A1</span>
+    </div>
+
+    <nav class="nav-hub">
+        <a href="../index.html" class="nav-item">MAIN HUB</a>
+        <a href="reactor.html" class="nav-item active">THE CORE</a>
+        <a href="research.html" class="nav-item">RESEARCH AREA</a>
+        <a href="bunker.html" class="nav-item">ADMIN STUFF</a>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-title">REACTOR CORE VISUALIZATION (HD)</div>
+            <div class="card-content">
+                <div class="reactor-stage">
+                    <div class="vessel-3d">
+                        <div class="glow-effect" id="core-glow"></div>
+                        <div class="rod-array">
+                            <div class="control-rod" id="rod-v-0"></div>
+                            <div class="control-rod" id="rod-v-1"></div>
+                            <div class="control-rod" id="rod-v-2"></div>
+                            <div class="control-rod" id="rod-v-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">STABILIZATION PROTOCOL - EARN RESEARCH PTS</div>
+            <div class="card-content">
+                <div class="target-panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                        <p style="font-size:13px; color:var(--sub); margin:0;">Adjust the throttle levers to make the
+                            power marker align with the target zone. Holding the position generates research data.</p>
+                        <div id="match-light">OFFLINE</div>
+                    </div>
+                    <div class="target-bar">
+                        <div class="target-indicator" id="target-box"></div>
+                        <div class="current-indicator" id="current-power-marker"></div>
+                    </div>
+                    <div class="metrics-row" style="margin-top:25px;">
+                        <div class="metric-card">
+                            <span class="m-label">MW OUTPUT</span>
+                            <div class="m-value" id="stat-power">0.0 MW</div>
+                        </div>
+                        <div class="metric-card">
+                            <span class="m-label">TEMP GAUGE</span>
+                            <div class="m-value" id="stat-heat">350.0°C</div>
+                        </div>
+                        <div class="metric-card">
+                            <span class="m-label">STABILITY INDEX</span>
+                            <div class="m-value" id="stat-stability">100.0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">MAIN STEERING & ROD CONTROL (V1.2)</div>
+            <div class="card-content">
+                <div class="control-levers">
+                    <div class="lever-group">
+                        <span class="m-label">ROD SET 01 (V)</span>
+                        <input type="range" class="throttle-v" min="0" max="100" value="20"
+                            oninput="updateRod(0, this.value)">
+                    </div>
+                    <div class="lever-group">
+                        <span class="m-label">ROD SET 02 (V)</span>
+                        <input type="range" class="throttle-v" min="0" max="100" value="20"
+                            oninput="updateRod(1, this.value)">
+                    </div>
+                    <div class="lever-group" style="grid-column: span 2;">
+                        <span class="m-label">HORIZONTAL TRIM STICK</span>
+                        <input type="range" class="throttle-h" min="0" max="100" value="20"
+                            oninput="updateRod(2, this.value)">
+                    </div>
+                    <div class="lever-group" style="grid-column: span 2;">
+                        <span class="m-label">AUX COOLING PUMP</span>
+                        <input type="range" class="throttle-h" min="0" max="100" value="50"
+                            oninput="updateCooling(this.value)">
+                    </div>
+                </div>
+                <p style="font-size:11px; color:#555; text-align:center; margin-top:20px;">I programmed these sliders to
+                    have a custom physics response to make them feel like a real industrial station. Please use them
+                    carefully.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../stuff.js"></script>
+</body>
+
+</html>

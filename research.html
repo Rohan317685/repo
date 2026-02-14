@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>THE RESEARCH AREA - ARCHIVE ACCESS</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <span>STATION STATUS: ARCHIVE ACCESS</span>
+        <span id="game-score">RESEARCH PROGRESS: <span id="game-credits">0</span> PTS</span>
+        <span>PC: LAB_STATION</span>
+    </div>
+
+    <nav class="nav-hub">
+        <a href="../index.html" class="nav-item">MAIN HUB</a>
+        <a href="reactor.html" class="nav-item">THE CORE</a>
+        <a href="research.html" class="nav-item active">RESEARCH AREA</a>
+        <a href="bunker.html" class="nav-item">ADMIN STUFF</a>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-title">CLASSIFIED ARCHIVE - DATA SETS (SHIPPED)</div>
+            <div class="card-content">
+                <p style="font-size: 14px; color: var(--sub);">Accessing these datasets requires research points. You
+                    can generate these by performing the stabilization protocols in the core control room. I made sure
+                    the progress saves locally to your browser profile so you don't lose anything.</p>
+
+                <div class="metrics-row" style="margin-top:25px;">
+                    <div class="metric-card" id="data-block-1" style="opacity: 0.4;">
+                        <span class="m-label">LOGSET-01 [A]</span>
+                        <div class="m-value" style="font-size: 18px;">50 PTS</div>
+                        <p style="font-size: 11px; color: var(--sub); margin:15px 0;">Historical stability telemetry
+                            from the prototype testing phase.</p>
+                        <button class="btn-action" id="unlock-btn-1" style="width:100%; font-size:11px;"
+                            onclick="unlock_sector(1, 50)">INITIATE DOWNLOAD</button>
+                        <div class="unlocked-data" id="data-content-1">
+                            <p style="color:var(--accent); font-weight:700;">[ STATUS: ACCESS GRANTED ]</p>
+                            <p style="font-size:12px;">Historical logs show that the core remained within 5% of the
+                                target threshold during 90% of operation. I spent a long time developing the unlock
+                                protocols for this interface.</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card" id="data-block-2" style="opacity: 0.4;">
+                        <span class="m-label">LOGSET-02 [B]</span>
+                        <div class="m-value" style="font-size: 18px;">150 PTS</div>
+                        <p style="font-size: 11px; color: var(--sub); margin:15px 0;">Thermal distribution data and
+                            cooling pump efficiency reports.</p>
+                        <button class="btn-action" id="unlock-btn-2" style="width:100%; font-size:11px;"
+                            onclick="unlock_sector(2, 150)">INITIATE DOWNLOAD</button>
+                        <div class="unlocked-data" id="data-content-2">
+                            <p style="color:var(--accent); font-weight:700;">[ STATUS: ACCESS GRANTED ]</p>
+                            <p style="font-size:12px;">Heat dissipation is critical. If the auxiliary pump isn't active,
+                                the core temperature reaches critical limits in seconds. I researched real cooling
+                                systems to make this logic accurate.</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card" id="data-block-3" style="opacity: 0.4;">
+                        <span class="m-label">LOGSET-03 [C]</span>
+                        <div class="m-value" style="font-size: 18px;">500 PTS</div>
+                        <p style="font-size: 11px; color: var(--sub); margin:15px 0;">Schematic visualizations of the
+                            reactor core geometry.</p>
+                        <button class="btn-action" id="unlock-btn-3" style="width:100%; font-size:11px;"
+                            onclick="unlock_sector(3, 500)">INITIATE DOWNLOAD</button>
+                        <div class="unlocked-data" id="data-content-3">
+                            <p style="color:var(--accent); font-weight:700;">[ STATUS: ACCESS GRANTED ]</p>
+                            <center>
+                                <div style="font-size:40px;">⚛️</div>
+                            </center>
+                            <p style="font-size:12px;">This is my custom drawing of the internal rod array. I hope this
+                                visualization helps people understand how the reactor is actually built. I'm really
+                                proud of this part of the project.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../stuff.js"></script>
+</body>
+
+</html>
